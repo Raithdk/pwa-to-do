@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { Suspense, lazy} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import Frontpage from './components/Frontpage'
+
+
+const Todo = lazy(() => import("./components/Todo"))
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <BrowserRouter>
+        <Suspense fallback="Loading">
+        <Link to="/">Home</Link> | <Link to="Todo">Todo</Link>
+          <Routes>
+            <Route index element={<Frontpage/>} />
+            <Route path="/Todo" element={<Todo/>} />
+          </Routes>
+          </Suspense>
+      </BrowserRouter>
+    
+      
     </div>
   );
 }
