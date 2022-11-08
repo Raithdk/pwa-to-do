@@ -7,6 +7,9 @@ export default function ToDo(){
     const [input, setInput] = useState([]);
 
     const addTodo = (todo) =>{
+        if(todo == ""){
+            return
+        }
         const newTodo = {
             id: Math.random(),
             todo: todo
@@ -29,8 +32,8 @@ export default function ToDo(){
         // Get a done list ready
         const todo = toDolist.filter((todo) => todo.id === id)
         const doneTodo = {
-            id: todo.id,
-            todo: todo.todo
+            id: todo[0].id,
+            todo: todo[0].todo
         }
         setDoneList([...doneList, doneTodo]);
 
