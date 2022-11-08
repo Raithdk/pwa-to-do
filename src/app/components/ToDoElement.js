@@ -1,12 +1,8 @@
 
 
-
-
-function Todo(){
+export default function ToDoElement(){
 
     return(
         <p>Todo</p>
     );
 }
-
-export default Todo;
