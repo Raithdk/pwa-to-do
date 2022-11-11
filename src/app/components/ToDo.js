@@ -1,5 +1,6 @@
 
 import React, {useState} from 'react';
+import { Button, ListGroup, InputGroup, FormControl, Form} from 'react-bootstrap';
 
 export default function ToDo(){
     const [toDolist, setList] = useState([]);
@@ -14,9 +15,7 @@ export default function ToDo(){
             id: Math.random(),
             todo: todo
         }
-
         setList([...toDolist, newTodo]);
-            
         // clear input box
         setInput("")
     };
@@ -24,7 +23,6 @@ export default function ToDo(){
     const deleteTodo = (id) =>{
         // Takes the list and adds every element that does not have an id equal to "id"
         const newList = toDolist.filter((todo) => todo.id !== id);
-
         setList(newList);
     }
 
@@ -40,39 +38,47 @@ export default function ToDo(){
         deleteTodo(id)
     }
 
+    const deleteToDone = (id) =>{
+        const newList = doneList.filter((todo) => todo.id !== id);
+        setDoneList(newList);
+    }
+
     return(
         <div>
-            <p>Todo</p>
-            <ul>
-                {doneList.map((todo) => (
-                    <li key={todo.id}>
-                        {todo.todo}
-                        <button onClick={() => addToDone(todo.id)}>&radic;</button>
-                        <button onClick={() => deleteTodo(todo.id)}>&times;</button>
-                        
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <input 
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}/>
-                <button onClick={() => addTodo(input)}>
-                    Add
-                </button>
-            </div>
+            <p>Todo Screen</p>
             
-            <ul>
+            <h2>ToDo</h2>
+            <div className='mx-5'>
+                <InputGroup>
+                    <Form.Control
+                    placeholder={input}
+                    onChange={(e) => setInput(e.target.value)}/>
+                    <Button onClick={() => addTodo(input)}>
+                        Add
+                    </Button>
+                </InputGroup>
+                
+            </div>
+            <ListGroup as="ul" className="mx-5 m-3">
                 {toDolist.map((todo) => (
-                    <li key={todo.id}>
+                    <ListGroup.Item as="li" key={todo.id}>
                         {todo.todo}
-                        <button onClick={() => addToDone(todo.id)}>&radic;</button>
-                        <button onClick={() => deleteTodo(todo.id)}>&times;</button>
-                        
-                    </li>
+                        <Button className="mx-1" variant="success" onClick={() => addToDone(todo.id)}>✓</Button>
+                        <Button className="mx-1" variant="danger" onClick={() => deleteTodo(todo.id)}>&times;</Button>    
+                    </ListGroup.Item>
                 ))}
-            </ul>
+            </ListGroup>
+
+            <h2>DONE</h2>
+            <ListGroup as="ul" className="mx-5 m-3">
+                {doneList.map((todo) => (
+                    <ListGroup.Item as="li" key={todo.id}>
+                        {todo.todo}
+                        <Button className="mx-1" variant="danger" onClick={() => deleteToDone(todo.id)}>&times;</Button>            
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
+        
             
         </div>
     );
@@ -81,4 +87,3 @@ export default function ToDo(){
 
 
 
-// setTheArray([...theArray, newElement]) Puts the element into the already built array

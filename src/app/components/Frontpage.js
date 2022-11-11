@@ -3,7 +3,7 @@
 function Frontpage(){
 
     return(
-        <p>Frontpage</p>
+        <p>Welcome to my Todo Application for Mobile Software Development on the Sofware Engineering 5 Semester</p>
     );
 }
 

@@ -3,23 +3,25 @@ import './App.css';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Frontpage from './components/Frontpage'
 
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+
 
 const Todo = lazy(() => import("./components/ToDo"))
 const ToDo_Done = lazy(() => import("./components/ToDo_Done"))
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       
       <BrowserRouter>
         <Suspense fallback="Loading">
-        <Link to="/">Home</Link> | <Link to="ToDo">Todo</Link> | <Link to="Done">Done</Link>
+          <NavigationBar/>
           <Routes>
             <Route index element={<Frontpage/>} />
             <Route path="/ToDo" element={<Todo/>} />
             <Route path="/Done" element={<ToDo_Done/>} />
           </Routes>
-          </Suspense>
+        </Suspense>
       </BrowserRouter>
     
       
@@ -27,4 +29,20 @@ function App() {
   );
 }
 
-export default App;
+function NavigationBar() {
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">TODO App!</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/ToDo">TODOs</Nav.Link>
+            <Nav.Link href="/Done">Finished TODOs</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
