@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Frontpage from './components/Frontpage'
 
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import ToDoProvider from './components/ToDoProvider';
 
 
 const Todo = lazy(() => import("./components/ToDo"))
@@ -12,18 +13,18 @@ const ToDo_Done = lazy(() => import("./components/ToDo_Done"))
 export default function App() {
   return (
     <div className="App">
-      
+      <ToDoProvider>
       <BrowserRouter>
         <Suspense fallback="Loading">
           <NavigationBar/>
-          <Routes>
-            <Route index element={<Frontpage/>} />
-            <Route path="/ToDo" element={<Todo/>} />
-            <Route path="/Done" element={<ToDo_Done/>} />
-          </Routes>
+            <Routes>
+              <Route index element={<Frontpage/>} />
+              <Route path="/ToDo" element={<Todo/>} />
+              <Route path="/Done" element={<ToDo_Done/>} />
+            </Routes>
         </Suspense>
       </BrowserRouter>
-    
+      </ToDoProvider>
       
     </div>
   );
@@ -46,3 +47,5 @@ function NavigationBar() {
     </Navbar>
   );
 }
+
+

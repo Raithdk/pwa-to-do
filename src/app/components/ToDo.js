@@ -1,30 +1,16 @@
 
 import React, {useState} from 'react';
-import { Button, ListGroup, InputGroup, FormControl, Form} from 'react-bootstrap';
+import { Button, ListGroup, InputGroup, Form} from 'react-bootstrap';
+import ToDoForm from './ToDoForm';
+import { useToDoContext } from './ToDoProvider';
 
 export default function ToDo(){
+    const { toDolist1 , deleteTodo} = useToDoContext();
+
     const [toDolist, setList] = useState([]);
     const [doneList, setDoneList] = useState([]);
-    const [input, setInput] = useState([]);
+   
 
-    const addTodo = (todo) =>{
-        if(todo == ""){
-            return
-        }
-        const newTodo = {
-            id: Math.random(),
-            todo: todo
-        }
-        setList([...toDolist, newTodo]);
-        // clear input box
-        setInput("")
-    };
-
-    const deleteTodo = (id) =>{
-        // Takes the list and adds every element that does not have an id equal to "id"
-        const newList = toDolist.filter((todo) => todo.id !== id);
-        setList(newList);
-    }
 
     const addToDone = (id) => {
         // Get a done list ready
@@ -48,19 +34,10 @@ export default function ToDo(){
             <p>Todo Screen</p>
             
             <h2>ToDo</h2>
-            <div className='mx-5'>
-                <InputGroup>
-                    <Form.Control
-                    placeholder={input}
-                    onChange={(e) => setInput(e.target.value)}/>
-                    <Button onClick={() => addTodo(input)}>
-                        Add
-                    </Button>
-                </InputGroup>
-                
-            </div>
+            <ToDoForm/>
+            
             <ListGroup as="ul" className="mx-5 m-3">
-                {toDolist.map((todo) => (
+                {toDolist1.map((todo) => (
                     <ListGroup.Item as="li" key={todo.id}>
                         {todo.todo}
                         <Button className="mx-1" variant="success" onClick={() => addToDone(todo.id)}>✓</Button>
@@ -79,6 +56,7 @@ export default function ToDo(){
                 ))}
             </ListGroup>
         
+          
             
         </div>
     );
