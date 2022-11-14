@@ -5,29 +5,7 @@ import ToDoForm from './ToDoForm';
 import { useToDoContext } from './ToDoProvider';
 
 export default function ToDo(){
-    const { toDolist1 , deleteTodo} = useToDoContext();
-
-    const [toDolist, setList] = useState([]);
-    const [doneList, setDoneList] = useState([]);
-   
-
-
-    const addToDone = (id) => {
-        // Get a done list ready
-        const todo = toDolist.filter((todo) => todo.id === id)
-        const doneTodo = {
-            id: todo[0].id,
-            todo: todo[0].todo
-        }
-        setDoneList([...doneList, doneTodo]);
-
-        deleteTodo(id)
-    }
-
-    const deleteToDone = (id) =>{
-        const newList = doneList.filter((todo) => todo.id !== id);
-        setDoneList(newList);
-    }
+    const { toDolist, doneList, deleteTodo, addToDone, deleteToDone} = useToDoContext();
 
     return(
         <div>
@@ -35,9 +13,8 @@ export default function ToDo(){
             
             <h2>ToDo</h2>
             <ToDoForm/>
-            
             <ListGroup as="ul" className="mx-5 m-3">
-                {toDolist1.map((todo) => (
+                {toDolist.map((todo) => (
                     <ListGroup.Item as="li" key={todo.id}>
                         {todo.todo}
                         <Button className="mx-1" variant="success" onClick={() => addToDone(todo.id)}>✓</Button>

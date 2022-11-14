@@ -5,8 +5,9 @@ const TodoContext = createContext();
 const initialTodoListState = [{id: Math.random() ,todo:"Hello WOrld"}]
 
 const ToDoProvider = ({ children }) =>{
-    const [toDolist1, setToDoList] = useState(initialTodoListState);
-    
+    const [toDolist, setToDoList] = useState(initialTodoListState);
+    const [doneList, setDoneList] = useState([]);
+
     const addTodo = (todo) =>{
         if(todo == ""){
             return
@@ -15,22 +16,44 @@ const ToDoProvider = ({ children }) =>{
             id: Math.random(),
             todo: todo
         }
-        setToDoList([...toDolist1, newTodo]);
+        setToDoList([...toDolist, newTodo]);
         
         
     };
 
     const deleteTodo = (id) =>{
         // Takes the list and adds every element that does not have an id equal to "id"
-        const newList = toDolist1.filter((todo) => todo.id !== id);
+        const newList = toDolist.filter((todo) => todo.id !== id);
         setToDoList(newList);
     }
 
 
+    const addToDone = (id) => {
+        // Get a done list ready
+        const todo = toDolist.filter((todo) => todo.id === id)
+        const doneTodo = {
+            id: todo[0].id,
+            todo: todo[0].todo
+        }
+        setDoneList([...doneList, doneTodo]);
+
+        deleteTodo(id)
+    }
+
+    const deleteToDone = (id) =>{
+        const newList = doneList.filter((todo) => todo.id !== id);
+        setDoneList(newList);
+    }
+
+
+
     const contextValue = {
-        toDolist1,
+        toDolist,
+        doneList,
         addTodo,
         deleteTodo,
+        addToDone,
+        deleteToDone,
  
 
     };

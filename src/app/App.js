@@ -14,16 +14,16 @@ export default function App() {
   return (
     <div className="App">
       <ToDoProvider>
-      <BrowserRouter>
-        <Suspense fallback="Loading">
-          <NavigationBar/>
-            <Routes>
-              <Route index element={<Frontpage/>} />
-              <Route path="/ToDo" element={<Todo/>} />
-              <Route path="/Done" element={<ToDo_Done/>} />
-            </Routes>
-        </Suspense>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Suspense fallback="Loading">
+            <NavigationBar/>
+              <Routes>
+                <Route index element={<Frontpage/>} />
+                <Route path="/ToDo" element={<Todo/>} />
+                <Route path="/Done" element={<ToDo_Done/>} />
+              </Routes>
+          </Suspense>
+        </BrowserRouter>
       </ToDoProvider>
       
     </div>
