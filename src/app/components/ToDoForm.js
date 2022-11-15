@@ -1,5 +1,5 @@
 import { useToDoContext } from "./ToDoProvider";
-import { Button, Input , InputGroup, Form} from 'react-bootstrap';
+import { Button , InputGroup, Form} from 'react-bootstrap';
 import { useState } from "react";
 
 
@@ -14,9 +14,8 @@ const ToDoForm = () => {
         setInput("")
     }
 
-
     return(
-<div className='mx-5'>
+        <div className='mx-5'>
                 <InputGroup>
                     <Form.Control
                     placeholder={input}
@@ -25,7 +24,7 @@ const ToDoForm = () => {
                         Add 
                     </Button>
                 </InputGroup>
-            </div>)
+        </div>)
 };
 
 export default ToDoForm;

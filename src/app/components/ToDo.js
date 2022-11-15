@@ -1,6 +1,6 @@
 
-import React, {useState} from 'react';
-import { Button, ListGroup, InputGroup, Form} from 'react-bootstrap';
+import React from 'react';
+import { Button, ListGroup} from 'react-bootstrap';
 import ToDoForm from './ToDoForm';
 import { useToDoContext } from './ToDoProvider';
 
@@ -9,9 +9,7 @@ export default function ToDo(){
 
     return(
         <div>
-            <p>Todo Screen</p>
-            
-            <h2>ToDo</h2>
+            <h2>ToDos</h2>
             <ToDoForm/>
             <ListGroup as="ul" className="mx-5 m-3">
                 {toDolist.map((todo) => (
@@ -31,10 +29,7 @@ export default function ToDo(){
                         <Button className="mx-1" variant="danger" onClick={() => deleteToDone(todo.id)}>&times;</Button>            
                     </ListGroup.Item>
                 ))}
-            </ListGroup>
-        
-          
-            
+            </ListGroup>    
         </div>
     );
 

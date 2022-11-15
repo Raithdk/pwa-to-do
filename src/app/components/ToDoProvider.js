@@ -2,14 +2,15 @@ import React, {useState, createContext, useContext} from "react";
 
 const TodoContext = createContext();
 
-const initialTodoListState = [{id: Math.random() ,todo:"Hello WOrld"}]
+const initialTodoListState = [{id: Math.random() ,todo:"Wash Floor"}]
 
 const ToDoProvider = ({ children }) =>{
     const [toDolist, setToDoList] = useState(initialTodoListState);
     const [doneList, setDoneList] = useState([]);
 
     const addTodo = (todo) =>{
-        if(todo == ""){
+        // Ensure empty todos are not added
+        if(todo.trim().length === 0){
             return
         }
         const newTodo = {
@@ -26,7 +27,6 @@ const ToDoProvider = ({ children }) =>{
         const newList = toDolist.filter((todo) => todo.id !== id);
         setToDoList(newList);
     }
-
 
     const addToDone = (id) => {
         // Get a done list ready
@@ -45,8 +45,6 @@ const ToDoProvider = ({ children }) =>{
         setDoneList(newList);
     }
 
-
-
     const contextValue = {
         toDolist,
         doneList,
@@ -54,8 +52,6 @@ const ToDoProvider = ({ children }) =>{
         deleteTodo,
         addToDone,
         deleteToDone,
- 
-
     };
     return (
         <TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>
